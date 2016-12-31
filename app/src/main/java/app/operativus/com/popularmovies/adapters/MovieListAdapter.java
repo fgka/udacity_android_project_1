@@ -43,16 +43,19 @@ public class MovieListAdapter extends ArrayAdapter<MovieItem> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ImageView view = (ImageView) convertView;
+
         if (view == null) {
             view = new ImageView(getContext());
         }
         String url = getPosterUrlByPosition(position);
         Picasso.with(getContext()).load(url).into(view);
-        return convertView;
+
+        return view;
     }
 
     private String getPosterUrlByPosition(int position) {
         MovieItem item = getItem(position);
+
         if (item == null) {
             throw new IllegalArgumentException("Could not find item at " + position);
         }

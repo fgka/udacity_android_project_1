@@ -1,4 +1,4 @@
-package app.operativus.com.popularmovies.tasks;
+package app.operativus.com.popularmovies.apis;
 
 
 import android.net.Uri;
@@ -17,9 +17,9 @@ import java.util.List;
 import app.operativus.com.popularmovies.BuildConfig;
 import app.operativus.com.popularmovies.data.MovieItem;
 import app.operativus.com.popularmovies.data.MovieListRanking;
-import app.operativus.com.popularmovies.json.JSONMovieListParser;
-import app.operativus.com.popularmovies.json.JSONMovieParser;
 import app.operativus.com.popularmovies.json.JSONParser;
+import app.operativus.com.popularmovies.json.impl.JSONMovieListParser;
+import app.operativus.com.popularmovies.json.impl.JSONMovieParser;
 
 public class QueryTheMovieDB {
 

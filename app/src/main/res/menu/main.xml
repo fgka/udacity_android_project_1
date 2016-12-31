@@ -1,18 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<menu xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity">
-    <group
-        android:id="@+id/action_list_ranking"
-        android:checkableBehavior="single">
-        <item
-            android:id="@+id/action_most_popular"
-            android:title="@string/action_most_popular"
-            app:showAsAction="never" />
-        <item
-            android:id="@+id/action_top_rated"
-            android:title="@string/action_top_rated"
-            app:showAsAction="never" />
-    </group>
 </menu>

@@ -26,15 +26,15 @@ public class MovieItem implements Parcelable {
     };
     private static final String LOG_TAG = MovieItem.class.getSimpleName();
     private final Long id;
-    private final String posterImageUrl;
+    private final String posterImagePath;
     private final String originalTitle;
     private final String plotSynopsis;
     private final Double userRating;
     private final Date releaseDate;
 
-    public MovieItem(Long id, String posterImageUrl, String originalTitle, String plotSynopsis, Double userRating, Date releaseDate) {
+    public MovieItem(Long id, String posterImagePath, String originalTitle, String plotSynopsis, Double userRating, Date releaseDate) {
         this.id = id;
-        this.posterImageUrl = posterImageUrl;
+        this.posterImagePath = posterImagePath;
         this.originalTitle = originalTitle;
         this.plotSynopsis = plotSynopsis;
         this.userRating = userRating;
@@ -52,8 +52,8 @@ public class MovieItem implements Parcelable {
         );
     }
 
-    public String getPosterImageUrl() {
-        return posterImageUrl;
+    public String getPosterImagePath() {
+        return posterImagePath;
     }
 
     public String getOriginalTitle() {
@@ -88,7 +88,7 @@ public class MovieItem implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.posterImageUrl);
+        dest.writeString(this.posterImagePath);
         dest.writeString(this.originalTitle);
         dest.writeString(this.plotSynopsis);
         dest.writeDouble(this.userRating);

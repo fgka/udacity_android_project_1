@@ -7,6 +7,7 @@ import android.util.Log;
 import java.util.List;
 
 import app.operativus.com.popularmovies.adapters.MovieListAdapter;
+import app.operativus.com.popularmovies.apis.QueryTheMovieDB;
 import app.operativus.com.popularmovies.data.MovieItem;
 import app.operativus.com.popularmovies.data.MovieListRanking;
 

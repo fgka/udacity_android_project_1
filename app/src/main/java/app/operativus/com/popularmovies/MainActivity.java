@@ -9,11 +9,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import app.operativus.com.popularmovies.data.MovieListRanking;
 import app.operativus.com.popularmovies.fragments.MovieListFragment;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final String LOG_TAG = MainActivity.class.getSimpleName();
+    private static final String LOG_TAG = MainActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,19 +39,20 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        boolean result = false;
         int id = item.getItemId();
 
-        if (id == R.id.action_most_popular) {
-            Log.d(LOG_TAG, "Menu: most popular");
+        Log.d(LOG_TAG, "Menu: " + item.getTitle());
+        MovieListRanking ranking = MovieListRanking.fromId(id);
+        if (ranking != null) {
             //TODO
-            return true;
+            item.setChecked(true);
+            result = true;
+        } else {
+            result = super.onOptionsItemSelected(item);
         }
-        if (id == R.id.action_top_rated) {
-            Log.d(LOG_TAG, "Menu: top rated");
-            //TODO
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+
+        return result;
     }
 
     /**

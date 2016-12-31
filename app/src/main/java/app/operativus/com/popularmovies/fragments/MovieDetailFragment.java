@@ -12,12 +12,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import app.operativus.com.popularmovies.MovieItem;
 import app.operativus.com.popularmovies.R;
-
-/**
- * Created by gkandriotti on 2016-12-30.
- */
+import app.operativus.com.popularmovies.data.MovieItem;
 
 public class MovieDetailFragment extends Fragment {
 

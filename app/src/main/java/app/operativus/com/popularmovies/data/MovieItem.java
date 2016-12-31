@@ -1,8 +1,14 @@
-package app.operativus.com.popularmovies;
+package app.operativus.com.popularmovies.data;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.Date;
+
+/**
+ * Source for {@link Parcelable}:
+ * https://www.google.com/url?q=http://www.developerphil.com/parcelable-vs-serializable/&sa=D&ust=1483211812738000&usg=AFQjCNHlsmOf15NfHij4U6QLVJSHZC2lBw
+ */
 public class MovieItem implements Parcelable {
 
     public static final String INTENT_EXTRA_NAME = "EXTRA_PARCEL";
@@ -19,27 +25,30 @@ public class MovieItem implements Parcelable {
         }
     };
     private static final String LOG_TAG = MovieItem.class.getSimpleName();
+    private final Long id;
     private final String posterImageUrl;
     private final String originalTitle;
     private final String plotSynopsis;
     private final Double userRating;
-    private final Integer releaseYear;
+    private final Date releaseDate;
 
-    public MovieItem(String posterImageUrl, String originalTitle, String plotSynopsis, Double userRating, Integer releaseYear) {
+    public MovieItem(Long id, String posterImageUrl, String originalTitle, String plotSynopsis, Double userRating, Date releaseDate) {
+        this.id = id;
         this.posterImageUrl = posterImageUrl;
         this.originalTitle = originalTitle;
         this.plotSynopsis = plotSynopsis;
         this.userRating = userRating;
-        this.releaseYear = releaseYear;
+        this.releaseDate = releaseDate;
     }
 
     public MovieItem(Parcel in) {
         this(
+                in.readLong(), //id
                 in.readString(), //posterImageUrl
                 in.readString(), //originalTitle
                 in.readString(), //plotSynopsis
                 in.readDouble(), //userRating
-                in.readInt() //releaseYear
+                new Date(in.readLong()) //releaseDate
         );
     }
 
@@ -59,15 +68,16 @@ public class MovieItem implements Parcelable {
         return userRating;
     }
 
-    public Integer getReleaseYear() {
-        return releaseYear;
+    public Date getReleaseDate() {
+        return releaseDate;
     }
 
     @Override
     public String toString() {
         return "MovieItem{" +
-                "originalTitle='" + originalTitle + '\'' +
-                ", releaseYear=" + releaseYear +
+                "id=" + id +
+                ", originalTitle='" + originalTitle + '\'' +
+                ", releaseDate=" + releaseDate +
                 '}';
     }
 
@@ -82,6 +92,6 @@ public class MovieItem implements Parcelable {
         dest.writeString(this.originalTitle);
         dest.writeString(this.plotSynopsis);
         dest.writeDouble(this.userRating);
-        dest.writeInt(this.releaseYear);
+        dest.writeLong(this.releaseDate.getTime());
     }
 }

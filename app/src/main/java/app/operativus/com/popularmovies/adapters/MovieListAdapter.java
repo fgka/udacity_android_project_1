@@ -11,9 +11,11 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import app.operativus.com.popularmovies.MovieItem;
+import app.operativus.com.popularmovies.data.MovieItem;
 
 public class MovieListAdapter extends ArrayAdapter<MovieItem> {
+
+    private static final String LOG_TAG = MovieListAdapter.class.getSimpleName();
 
     public MovieListAdapter(Context context, List<MovieItem> movieList) {
         super(context, 0, movieList);

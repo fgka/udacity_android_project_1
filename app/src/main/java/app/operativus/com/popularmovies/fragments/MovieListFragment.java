@@ -2,6 +2,7 @@ package app.operativus.com.popularmovies.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -14,21 +15,29 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import app.operativus.com.popularmovies.MovieDetailActivity;
-import app.operativus.com.popularmovies.MovieItem;
 import app.operativus.com.popularmovies.R;
 import app.operativus.com.popularmovies.adapters.MovieListAdapter;
+import app.operativus.com.popularmovies.data.MovieItem;
 
 public class MovieListFragment extends Fragment {
 
-    private final String LOG_TAG = MovieListFragment.class.getSimpleName();
+    private static final String LOG_TAG = MovieListFragment.class.getSimpleName();
 
     private MovieListAdapter movieListAdapter;
-    private List<MovieItem> movieList;
+    private List<MovieItem> movieList = new ArrayList<>();
 
     public MovieListFragment() {
+    }
+
+    public void setMovieList(@NonNull List<MovieItem> movieList) {
+        if (movieList.isEmpty()) {
+            Log.w(LOG_TAG, "Setting movie list to an empty list!");
+        }
+        this.movieList = movieList;
     }
 
     @Override

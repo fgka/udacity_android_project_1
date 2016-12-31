@@ -32,8 +32,8 @@ public class JSONMovieListParser implements JSONParser<List<MovieItem>> {
     private static final String LIST_ITEMS = "results";
     private static final String TOTAL_ITEMS = "total_results";
     private static final String TOTAL_PAGES = "total_pages";
-    // Date manipulation: YYYY-MM-DD
-    private static final String DATE_FORMAT = "%Y-%M-%d";
+    // Date manipulation
+    private static final String DATE_FORMAT = "yyyy-MM-dd";
     private static final SimpleDateFormat DATE_STRING_FORMAT = new SimpleDateFormat(DATE_FORMAT);
 
     /*
@@ -163,7 +163,7 @@ public class JSONMovieListParser implements JSONParser<List<MovieItem>> {
         try {
             result = DATE_STRING_FORMAT.parse(dateStr);
         } catch (ParseException e) {
-            Log.e(LOG_TAG, String.format("Could not parse date '%s' using format '%s'", dateStr, DATE_FORMAT));
+            Log.e(LOG_TAG, String.format("Could not parse date '%s' using format '%s'", dateStr, DATE_FORMAT), e);
         }
 
         return result;
@@ -177,13 +177,14 @@ public class JSONMovieListParser implements JSONParser<List<MovieItem>> {
     public final List<MovieItem> parse(@NonNull String json) {
         List<MovieItem> result = null;
         Log.d(LOG_TAG, "JSON input: " + json);
+
         try {
             JSONObject jsonObject = new JSONObject(json);
             result = parse(jsonObject);
         } catch (JSONException e) {
             Log.e(LOG_TAG, "Could not parse json string!", e);
         }
-        //TODO
+
         return result;
     }
 }

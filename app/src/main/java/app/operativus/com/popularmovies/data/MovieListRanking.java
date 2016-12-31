@@ -6,7 +6,9 @@ import app.operativus.com.popularmovies.R;
 public enum MovieListRanking {
 
     //@formatter:off
-    MOST_POPULAR(R.id.action_most_popular), TOP_RATED(R.id.action_top_rated);
+    MOST_POPULAR(R.id.action_most_popular)
+    ,TOP_RATED(R.id.action_top_rated)
+    ;
     //@formatter:on
 
     private final int menuId;

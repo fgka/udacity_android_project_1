@@ -116,6 +116,7 @@ public class MovieListFragment extends Fragment implements SharedPreferences.OnS
         GridView gridView = (GridView) rootView.findViewById(R.id.gridview_movie_list);
 
         gridView.setAdapter(this.movieListAdapter);
+        gridView.setColumnWidth(this.movieListAdapter.getPosterSize().getWidthInPx());
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {

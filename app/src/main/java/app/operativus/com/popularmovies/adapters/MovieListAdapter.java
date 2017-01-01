@@ -31,6 +31,10 @@ public class MovieListAdapter extends ArrayAdapter<MovieItem> {
         this(context, movieList, DEFAULT_POSTER_SIZE);
     }
 
+    public MoviePosterImageSize getPosterSize() {
+        return posterSize;
+    }
+
     /**
      * Source: https://square.github.io/picasso/
      *

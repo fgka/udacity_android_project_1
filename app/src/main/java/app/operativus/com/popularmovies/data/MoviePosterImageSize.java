@@ -22,4 +22,8 @@ public enum MoviePosterImageSize {
     public String getSizeUrlPath() {
         return sizeUrlPath;
     }
+
+    public int getWidthInPx() {
+        return Integer.valueOf(sizeUrlPath.substring(1));
+    }
 }

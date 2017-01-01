@@ -85,6 +85,10 @@ public class MovieListFragment extends Fragment implements SharedPreferences.OnS
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.movie_list_fragment, menu);
+        MenuItem menuItem = menu.findItem(getPreferredMovieListRanking().getMenuId());
+        if (menuItem != null) {
+            menuItem.setChecked(true);
+        }
     }
 
     @Override
@@ -99,7 +103,6 @@ public class MovieListFragment extends Fragment implements SharedPreferences.OnS
             item.setChecked(true);
             result = true;
         } else if (id == R.id.action_refresh) {
-            Log.d(LOG_TAG, "Menu: refresh");
             updateMovieList();
             result = true;
         } else {
@@ -139,7 +142,9 @@ public class MovieListFragment extends Fragment implements SharedPreferences.OnS
 
     private void setPreferredMovieListRanking(@NonNull MovieListRanking ranking) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        sharedPreferences.edit().putString(RANKING_PREFERENCE_NAME, ranking.name());
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(RANKING_PREFERENCE_NAME, ranking.name());
+        editor.commit();
     }
 
     @Override

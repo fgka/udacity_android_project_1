@@ -5,4 +5,5 @@
     <string name="action_refresh" translatable="true">Refresh</string>
     <string name="action_most_popular" translatable="true">Most Popular</string>
     <string name="action_top_rated" translatable="true">Top Rated</string>
+    <string name="btn_favorite" translatable="true">Mark as \nFavorite</string>
 </resources>

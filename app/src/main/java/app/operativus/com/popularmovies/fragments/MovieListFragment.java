@@ -1,10 +1,7 @@
 package app.operativus.com.popularmovies.fragments;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
@@ -19,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -28,6 +24,7 @@ import app.operativus.com.popularmovies.R;
 import app.operativus.com.popularmovies.adapters.MovieListAdapter;
 import app.operativus.com.popularmovies.data.MovieItem;
 import app.operativus.com.popularmovies.data.MovieListRanking;
+import app.operativus.com.popularmovies.helper.HealthStateChecker;
 import app.operativus.com.popularmovies.tasks.FetchMovieListTask;
 
 public class MovieListFragment extends Fragment implements SharedPreferences.OnSharedPreferenceChangeListener {
@@ -36,8 +33,6 @@ public class MovieListFragment extends Fragment implements SharedPreferences.OnS
 
     private static final String RANKING_PREFERENCE_NAME = "list_ranking";
     private static final MovieListRanking DEFAULT_RANKING = MovieListRanking.MOST_POPULAR;
-
-    private static final String NO_INTERNET_TOAST_MSG = "No Internet connection!";
 
     private MovieListAdapter movieListAdapter;
 
@@ -60,26 +55,11 @@ public class MovieListFragment extends Fragment implements SharedPreferences.OnS
     }
 
     private void updateMovieList() {
-        if (isOnline()) {
+        if (HealthStateChecker.isOnline(getActivity())) {
             MovieListRanking ranking = getPreferredMovieListRanking();
             FetchMovieListTask listTask = new FetchMovieListTask(this.movieListAdapter);
             listTask.execute(ranking);
-        } else {
-            Toast.makeText(getContext(), NO_INTERNET_TOAST_MSG, Toast.LENGTH_LONG).show();
         }
-    }
-
-    /**
-     * Source: https://stackoverflow.com/questions/1560788/how-to-check-internet-access-on-android-inetaddress-never-times-out
-     *
-     * @return
-     */
-    private boolean isOnline() {
-        ConnectivityManager cm =
-                (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo netInfo = cm.getActiveNetworkInfo();
-
-        return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 
     @Override

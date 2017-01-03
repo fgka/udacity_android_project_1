@@ -21,6 +21,7 @@ import app.operativus.com.popularmovies.R;
 import app.operativus.com.popularmovies.apis.PosterImageLoader;
 import app.operativus.com.popularmovies.data.MovieItem;
 import app.operativus.com.popularmovies.data.MoviePosterImageSize;
+import app.operativus.com.popularmovies.helper.HealthStateChecker;
 
 public class MovieDetailFragment extends Fragment {
 
@@ -30,7 +31,7 @@ public class MovieDetailFragment extends Fragment {
     private static final String DATE_FORMAT = "yyyy";
     private static final SimpleDateFormat DATE_STRING_FORMAT = new SimpleDateFormat(DATE_FORMAT);
 
-    private static final MoviePosterImageSize DEFAULT_POSTER_SIZE = MoviePosterImageSize.W_185;
+    private static final MoviePosterImageSize DEFAULT_POSTER_SIZE = MoviePosterImageSize.W_342;
 
     private static final String LENGTH_IN_MIN_TMPL = "%01.0fmin";
     private static final String USER_RATING_TMPL = "%01.1f/10";
@@ -46,6 +47,19 @@ public class MovieDetailFragment extends Fragment {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        updateMovieDetail();
+    }
+
+    private void updateMovieDetail() {
+        if (HealthStateChecker.isOnline(getActivity())) {
+            //TODO
+        }
+    }
+
+
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.movie_detail_fragment, menu);
     }
@@ -55,7 +69,7 @@ public class MovieDetailFragment extends Fragment {
         int id = item.getItemId();
         if (id == R.id.action_refresh) {
             Log.d(LOG_TAG, "Refresh");
-            //TODO
+            updateMovieDetail();
             return true;
         }
         return super.onOptionsItemSelected(item);

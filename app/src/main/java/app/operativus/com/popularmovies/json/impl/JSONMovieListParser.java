@@ -22,6 +22,7 @@ public class JSONMovieListParser implements JSONParser<List<MovieItem>> {
     // Movie item JSON keys
     public static final String ITEM_ID = "id";
     public static final String ITEM_POSTER_IMAGE_PATH = "poster_path";
+    public static final String ITEM_TITLE = "title";
     public static final String ITEM_ORIGINAL_TITLE = "original_title";
     public static final String ITEM_PLOT_SYNOPSIS = "overview";
     public static final String ITEM_USER_RATING = "vote_average";
@@ -154,7 +155,7 @@ public class JSONMovieListParser implements JSONParser<List<MovieItem>> {
         Double userRating = jsonObject.getDouble(ITEM_USER_RATING);
         Date releaseDate = getDateFromString(jsonObject.getString(ITEM_RELEASE_DATE_STR));
 
-        return new MovieItem(id, posterImagePath, originalTitle, plotSynopsis, userRating, releaseDate);
+        return new MovieItem(id, posterImagePath, originalTitle, plotSynopsis, userRating, Double.NaN, releaseDate);
     }
 
     private static Date getDateFromString(String dateStr) {

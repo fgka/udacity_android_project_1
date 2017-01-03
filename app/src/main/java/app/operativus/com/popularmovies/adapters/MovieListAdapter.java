@@ -7,10 +7,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 
-import com.squareup.picasso.Picasso;
-
 import java.util.List;
 
+import app.operativus.com.popularmovies.apis.PosterImageLoader;
 import app.operativus.com.popularmovies.data.MovieItem;
 import app.operativus.com.popularmovies.data.MoviePosterImageSize;
 
@@ -18,7 +17,6 @@ public class MovieListAdapter extends ArrayAdapter<MovieItem> {
 
     private static final String LOG_TAG = MovieListAdapter.class.getSimpleName();
     private static final MoviePosterImageSize DEFAULT_POSTER_SIZE = MoviePosterImageSize.W_185;
-    private static final String MOVIE_POSTER_URL_TMPL = "http://image.tmdb.org/t/p/%s/%s";
 
     private final MoviePosterImageSize posterSize;
 
@@ -51,21 +49,11 @@ public class MovieListAdapter extends ArrayAdapter<MovieItem> {
         if (view == null) {
             view = new ImageView(getContext());
         }
-        String url = getPosterUrlByPosition(position);
-        Picasso.with(getContext()).load(url).into(view);
-
-        return view;
-    }
-
-    private String getPosterUrlByPosition(int position) {
         MovieItem item = getItem(position);
-
         if (item == null) {
-            throw new IllegalArgumentException("Could not find item at " + position);
+            throw new IllegalArgumentException("Movie item is null at position: " + position);
         }
-
-        return String.format(MOVIE_POSTER_URL_TMPL,
-                this.posterSize.getSizeUrlPath(),
-                item.getPosterImagePath());
+        PosterImageLoader.loadImage(getContext(), view, this.posterSize, item);
+        return view;
     }
 }

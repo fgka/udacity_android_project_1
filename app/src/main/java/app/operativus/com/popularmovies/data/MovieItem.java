@@ -2,6 +2,7 @@ package app.operativus.com.popularmovies.data;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
 import java.util.Date;
 
@@ -30,14 +31,22 @@ public class MovieItem implements Parcelable {
     private final String originalTitle;
     private final String plotSynopsis;
     private final Double userRating;
+    private final Double lengthInMin;
     private final Date releaseDate;
 
-    public MovieItem(Long id, String posterImagePath, String originalTitle, String plotSynopsis, Double userRating, Date releaseDate) {
+    public MovieItem(@NonNull Long id,
+                     @NonNull String posterImagePath,
+                     @NonNull String originalTitle,
+                     @NonNull String plotSynopsis,
+                     @NonNull Double userRating,
+                     @NonNull Double lengthInMin,
+                     @NonNull Date releaseDate) {
         this.id = id;
         this.posterImagePath = posterImagePath;
         this.originalTitle = originalTitle;
         this.plotSynopsis = plotSynopsis;
         this.userRating = userRating;
+        this.lengthInMin = lengthInMin;
         this.releaseDate = releaseDate;
     }
 
@@ -48,6 +57,7 @@ public class MovieItem implements Parcelable {
                 in.readString(), //originalTitle
                 in.readString(), //plotSynopsis
                 in.readDouble(), //userRating
+                in.readDouble(), //lengthInMin
                 new Date(in.readLong()) //releaseDate
         );
     }
@@ -66,6 +76,10 @@ public class MovieItem implements Parcelable {
 
     public Double getUserRating() {
         return userRating;
+    }
+
+    public Double getLengthInMin() {
+        return lengthInMin;
     }
 
     public Date getReleaseDate() {
@@ -88,10 +102,12 @@ public class MovieItem implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(this.id);
         dest.writeString(this.posterImagePath);
         dest.writeString(this.originalTitle);
         dest.writeString(this.plotSynopsis);
         dest.writeDouble(this.userRating);
+        dest.writeDouble(this.lengthInMin);
         dest.writeLong(this.releaseDate.getTime());
     }
 }
